@@ -97,3 +97,12 @@ function render() {
 }
 
 render(); // викликаємо цю ф-цію, щоб побачити зображення на сторінці
+
+// створюємо прослуховування події click на container, щоб клікати на кожне зображення (делегування)
+container.addEventListener('click', e => {
+  e.preventDefault(); // вимикаємо ф-ції браузера за замовчуванням, щоб зображення при кліку не завантажувалось
+  console.log(e.target, e.currentTarget);
+  if (e.target === e.currentTarget) return;
+  console.log(e.target.dataset.source);
+});
+// подія click відбувається по всьому зображенню, тому що e.target === e.currentTarget
