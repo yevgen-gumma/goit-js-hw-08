@@ -1,5 +1,6 @@
 body {
   background-color: #fff;
+  padding: 24px 156px 24px 156px;
 }
 
 ul {
@@ -20,11 +21,19 @@ img {
 
 .gallery {
   display: flex;
-  gap: 24px;
   flex-wrap: wrap;
+  row-gap: 24px;
+  gap: 24px;
 }
 
-.gallery-item {
+.gallery-image {
   width: 360px;
   height: 200px;
+}
+
+.gallery-item:hover img {
+  transform: scale(1.05);
+}
+img {
+  transition: transform 0.25s;
 }
