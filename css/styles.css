@@ -1,12 +1,10 @@
 body {
   background-color: #fff;
-  padding: 24px 156px 24px 156px;
 }
 
 ul {
   list-style-type: none;
-  margin: 0;
-  padding-left: 0;
+  margin: 0 auto;
 }
 
 a {
@@ -16,14 +14,15 @@ a {
 img {
   display: block;
   max-width: 100%;
-  height: auto;
 }
 
 .gallery {
   display: flex;
+  justify-content: center;
+  align-items: center;
   flex-wrap: wrap;
-  row-gap: 24px;
   gap: 24px;
+  padding: 24px 156px;
 }
 
 .gallery-image {
@@ -34,6 +33,7 @@ img {
 .gallery-item:hover img {
   transform: scale(1.05);
 }
+
 img {
   transition: transform 0.25s;
 }
