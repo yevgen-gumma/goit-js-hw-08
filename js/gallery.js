@@ -75,7 +75,7 @@ function imageTemplate(item) {
           class="gallery-image"
           src="${item.preview}"
           data-source="${item.original}"
-          alt="${item.description}"
+          alt="${item.description}"          
         />
       </a>
 </li>`;
@@ -99,10 +99,36 @@ function render() {
 render(); // викликаємо цю ф-цію, щоб побачити зображення на сторінці
 
 // створюємо прослуховування події click на container, щоб клікати на кожне зображення (делегування)
+
 container.addEventListener('click', e => {
   e.preventDefault(); // вимикаємо ф-ції браузера за замовчуванням, щоб зображення при кліку не завантажувалось
   console.log(e.target, e.currentTarget);
+
   if (e.target === e.currentTarget) return;
-  console.log(e.target.dataset.source);
+  // console.log(e.target.dataset.source);
+  // console.log(e.target);
+  // подія click відбувається по всьому зображенню, тому що e.target === e.currentTarget
+
+  //призначаємо змінну із значенням атрибуту data-source (шлях до зображення)
+  const imageSource = e.target.dataset.source;
+  const instance = basicLightbox.create(
+    `
+    <img src="${imageSource}" width="800" height="600">
+  `,
+    {
+      onShow: instance => {
+        window.addEventListener('keydown', closeModal); //додаємо слухача на кнопку Esc при відкритому модальному вікні
+      },
+
+      onClose: instance => {
+        window.removeEventListener('keydown', closeModal); //видаляємо слухача Esc при закритті модалного вікна
+      },
+    },
+  );
+
+  function closeModal(e) {
+    if (e.code === 'Escape') instance.close(); //перевірка чи натискається саме Esc
+  }
+
+  instance.show(); //запуск модального вікна, без виклику ф-ції модальне вікно не буде відображатися в браузері
 });
-// подія click відбувається по всьому зображенню, тому що e.target === e.currentTarget
